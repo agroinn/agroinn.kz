@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Редактор агрокарты</title>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    #map {
+      flex: 2;
+      height: 100%;
+    }
+
+    #editor {
+      flex: 1;
+      padding: 16px;
+      border-left: 1px solid #ccc;
+      display: none;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    textarea,
+    input,
+    select {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    #soil-status {
+      background-color: #f9f9f9;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <div id="editor">
+    <h2>Редактор тех. задания</h2>
+
+    <label for="crop">Культура:</label>
+    <input
+      id="crop"
+      type="text"
+      placeholder="Например, пшеница"
+    >
+
+    <label for="recommendation">Рекомендации:</label>
+    <textarea id="recommendation" rows="5">Внесение удобрений весной...</textarea>
+
+    <label for="priority">Приоритет задачи:</label>
+    <select id="priority">
+      <option>Высокий</option>
+      <option>Средний</option>
+      <option>Низкий</option>
+    </select>
+
+    <div id="soil-status">Загрузка данных о почве...</div>
+
+    <button type="button" onclick="saveData()">Сохранить</button>
+    <button type="button" onclick="closeEditor()">Закрыть</button>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    const map = L.map("map").setView([51.0, 71.0], 8);
+
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        attribution: "&copy; OpenStreetMap contributors"
+      }
+    ).addTo(map);
+
+    const marker = L.marker([51.0, 71.0]).addTo(map);
+
+    marker
+      .bindTooltip("Нажмите на точку, чтобы открыть редактор")
+      .openTooltip();
+
+    marker.on("click", () => {
+      document.getElementById("editor").style.display = "flex";
+      loadSoilStatus();
+    });
+
+    function closeEditor() {
+      document.getElementById("editor").style.display = "none";
+    }
+
+    function saveData() {
+      const crop = document.getElementById("crop").value;
+      const recommendation =
+        document.getElementById("recommendation").value;
+      const priority =
+        document.getElementById("priority").value;
+
+      alert(
+        `Сохранено:\n` +
+        `Культура: ${crop}\n` +
+        `Рекомендации: ${recommendation}\n` +
+        `Приоритет: ${priority}`
+      );
+
+      closeEditor();
+    }
+
+    function loadSoilStatus() {
+      const statusElement =
+        document.getElementById("soil-status");
+
+      statusElement.textContent =
+        "Загрузка данных о почве...";
+
+      fetch("https://example.com/api/soil-status")
+        .then((response) => response.json())
+        .then((data) => {
+          statusElement.textContent =
+            `Гумус: ${data.humus}%\n` +
+            `Азот: ${data.nitrogen} мг/кг\n` +
+            `pH: ${data.pH}`;
+        })
+        .catch(() => {
+          statusElement.textContent =
+            "Не удалось загрузить данные о почве";
+        });
+    }
+  </script>
+</body>
+</html>
