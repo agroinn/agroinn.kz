@@ -1,159 +1,267 @@
-<!DOCTYPE html> 
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Редактор агрокарты</title>
-
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  >
-
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      display: flex;
-      height: 100vh;
-    }
-
-    #map {
-      flex: 2;
-      height: 100%;
-    }
-
-    #editor {
-      flex: 1;
-      padding: 16px;
-      border-left: 1px solid #ccc;
-      display: none;
-      flex-direction: column;
-    }
-
-    label {
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    textarea,
-    input,
-    select {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 8px 12px;
-      cursor: pointer;
-    }
-
-    #soil-status {
-      background-color: #f9f9f9;
-      padding: 10px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-      white-space: pre-wrap;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Бесплатное подключение хозяйства к AgroInn</title>
+  <meta name="description" content="Бесплатное подключение полей к AgroInn для сельхозпроизводителей России, Беларуси и Казахстана.">
+  <meta name="theme-color" content="#f7f9f5">
+  <link rel="canonical" href="https://agroinn.kz/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Бесплатное подключение хозяйства к AgroInn">
+  <meta property="og:description" content="Цифровой портрет поля, мониторинг подключённых полей и AgroInn-Agent — по мере запуска и обработки данных.">
+  <meta property="og:url" content="https://agroinn.kz/">
+  <meta property="og:image" content="https://agroinn.kz/assets/images/agroinn-agent.webp">
+  <link rel="icon" href="/assets/images/agroinn-logo.svg" type="image/svg+xml">
+  <link rel="preload" href="/assets/images/field-portrait-mobile.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=header-nowrap-1">
+  <script src="/assets/js/main.js" defer></script>
 </head>
-
 <body>
-  <div id="map"></div>
+  <a class="skip-link" href="#main">К основному содержанию</a>
 
-  <div id="editor">
-    <h2>Редактор тех. задания</h2>
+  <header class="site-header" data-header>
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="AgroInn — на главную">
+        <img src="/assets/images/agroinn-logo.svg" width="185" height="80" alt="AgroInn">
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-navigation" data-menu-button>
+        <span></span><span></span><span></span>
+        <span class="visually-hidden">Открыть меню</span>
+      </button>
+      <nav class="site-nav" id="site-navigation" aria-label="Основная навигация" data-menu>
+        <a href="#benefits">Что входит</a>
+        <a href="#agent">AgroInn-Agent</a>
+        <a href="#process">Как подключиться</a>
+        <a href="#timeline">Сроки</a>
+        <a href="#faq">Вопросы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <div class="header-actions header-cta">
+        <a class="button button-small" href="#contacts">Связаться для подключения</a>
+      </div>
+    </div>
+  </header>
 
-    <label for="crop">Культура:</label>
-    <input
-      id="crop"
-      type="text"
-      placeholder="Например, пшеница"
-    >
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Бесплатное подключение к AgroInn</p>
+          <h1>Подключите хозяйство к AgroInn бесплатно</h1>
+          <p class="hero-lead">AgroInn подключает сельхозпроизводителей России, Беларуси и Казахстана к бесплатной системе цифрового мониторинга полей.</p>
+          <p>Бесплатная версия включает <strong>Цифровой портрет поля, мониторинг и AgroInn-Agent</strong>. Данные ваших полей помогают AgroInn-Agent подбирать подходящие технологии, товары и услуги.</p>
+          <div class="hero-actions">
+            <a class="button" href="#contacts">Связаться для подключения</a>
+            <a class="text-link" href="#process">Как проходит подключение <span aria-hidden="true">→</span></a>
+          </div>
+          <p class="note"><strong>Первые данные планируем предоставлять с января–февраля 2027 года.</strong> Поля подключаются и обрабатываются поэтапно.</p>
+        </div>
+        <div class="hero-visual">
+          <div class="image-frame hero-image">
+            <img src="/assets/images/field-portrait-mobile.webp" width="1400" height="788" alt="Интерфейс AgroInn с картой полей и показателями цифрового портрета">
+          </div>
+          <div class="status-panel" aria-label="Последовательность подключения и получения сервисов">
+            <div>
+              <span class="status-label">Сейчас</span>
+              <p>обращение → договор → передача полей → подключение</p>
+            </div>
+            <div>
+              <span class="status-label status-label-future">С января–февраля 2027 года</span>
+              <p>данные поля → мониторинг → AgroInn-Agent</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <label for="recommendation">Рекомендации:</label>
-    <textarea id="recommendation" rows="5">Внесение удобрений весной...</textarea>
+    <section class="section" id="benefits">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Бесплатная версия</p>
+          <h2>Что входит в бесплатный AgroInn</h2>
+          <p>AgroInn собирает данные по вашим полям, отслеживает их состояние и использует эту информацию в работе AgroInn-Agent.</p>
+        </div>
+        <div class="product-grid">
+          <article class="product-card">
+            <div class="product-image">
+              <img src="/assets/images/field-portrait.webp" width="1448" height="1086" alt="Карта AgroInn с данными пахотного слоя" loading="lazy">
+            </div>
+            <div class="product-content">
+              <span class="step-number">01</span>
+              <h3>Цифровой портрет поля</h3>
+              <p>Базовые цифровые данные о поле, включая характеристики пахотного слоя.</p>
+            </div>
+          </article>
+          <article class="product-card">
+            <div class="product-image">
+              <img src="/assets/images/monitoring-concept.webp" width="1500" height="844" alt="Концепт интерфейса мониторинга подключённых полей" loading="lazy">
+              <span class="image-badge">В разработке</span>
+            </div>
+            <div class="product-content">
+              <span class="step-number">02</span>
+              <h3>Мониторинг полей</h3>
+              <p>Наблюдение за состоянием подключённых полей и изменением доступных показателей.</p>
+              <p class="caption">Показан концепт интерфейса мониторинга. Финальный состав данных может измениться.</p>
+            </div>
+          </article>
+          <article class="product-card product-card-agent">
+            <div class="product-image">
+              <img src="/assets/images/agroinn-agent.webp" width="1500" height="767" alt="Интерфейс AgroInn-Agent с картой поля и цифровым помощником" loading="lazy">
+            </div>
+            <div class="product-content">
+              <span class="step-number">03</span>
+              <h3>AgroInn-Agent</h3>
+              <p>Помогает подбирать технологии, товары и услуги с учётом данных ваших полей.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <label for="priority">Приоритет задачи:</label>
-    <select id="priority">
-      <option>Высокий</option>
-      <option>Средний</option>
-      <option>Низкий</option>
-    </select>
+    <section class="section section-soft" aria-labelledby="field-flow-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="field-flow-title">Как поле подключается к AgroInn</h2>
+        </div>
+        <div class="visual-steps">
+          <figure class="visual-step">
+            <div class="visual-step-image"><img src="/assets/images/field-satellite.webp" width="1200" height="675" alt="Реальные поля на спутниковой карте" loading="lazy"></div>
+            <figcaption><span>1</span><strong>Поле</strong><small>Поле на карте</small></figcaption>
+          </figure>
+          <figure class="visual-step">
+            <div class="visual-step-image"><img src="/assets/images/field-contours.webp" width="1200" height="675" alt="Выделенные контуры полей на спутниковой карте" loading="lazy"></div>
+            <figcaption><span>2</span><strong>Контуры</strong><small>Определяем подключаемые поля</small></figcaption>
+          </figure>
+          <figure class="visual-step">
+            <div class="visual-step-image"><img src="/assets/images/field-data.webp" width="1200" height="675" alt="Подключённые поля с данными AgroInn" loading="lazy"></div>
+            <figcaption><span>3</span><strong>Данные AgroInn</strong><small>После обработки</small></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
-    <div id="soil-status">Загрузка данных о почве...</div>
+    <section class="section agent-section" id="agent">
+      <div class="container agent-grid">
+        <div>
+          <h2>AgroInn-Agent учитывает данные ваших полей</h2>
+          <p class="large-copy">AgroInn-Agent использует данные Цифрового портрета и мониторинга при подборе технологий, товаров и услуг.</p>
+          <p class="large-copy">Это позволяет подбирать решения не просто из общего каталога, а с учётом условий конкретных полей.</p>
+          <p class="note"><strong>Что использовать и что покупать — всегда решает хозяйство.</strong> Рекомендации AgroInn-Agent ни к чему не обязывают.</p>
+        </div>
+        <div class="agent-flow" aria-label="Как данные используются AgroInn-Agent">
+          <div class="flow-card"><span>01</span><strong>Ваши поля</strong></div>
+          <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-card"><span>02</span><strong>Цифровой портрет + мониторинг</strong></div>
+          <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-card flow-card-agent"><span>03</span><strong>AgroInn-Agent</strong></div>
+          <div class="flow-arrow" aria-hidden="true">↓</div>
+          <div class="flow-card"><span>04</span><strong>Технологии · товары · услуги</strong></div>
+        </div>
+      </div>
+    </section>
 
-    <button type="button" onclick="saveData()">Сохранить</button>
-    <button type="button" onclick="closeEditor()">Закрыть</button>
-  </div>
+    <section class="section section-soft" aria-labelledby="who-title">
+      <div class="container eligibility-grid">
+        <div>
+          <h2 id="who-title">Подключаем хозяйства в России, Беларуси и Казахстане</h2>
+          <p>К AgroInn могут подключаться сельхозпредприятия, ИП и КФХ.</p>
+          <p>Для подключения необходимо оформить договор на хозяйство и подтвердить право использования подключаемых земель.</p>
+        </div>
+        <div class="country-list" aria-label="Страны подключения">
+          <span>Россия</span><span>Беларусь</span><span>Казахстан</span>
+        </div>
+      </div>
+    </section>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-heading"><h2>Как подключиться</h2></div>
+        <ol class="process-list">
+          <li><span>1</span><div><h3>Свяжитесь с нами</h3><p>Позвоните или напишите представителю AgroInn в своей стране.</p></div></li>
+          <li><span>2</span><div><h3>Уточним данные хозяйства</h3><p>Обсудим хозяйство, подключаемые земли и подготовим необходимые документы.</p></div></li>
+          <li><span>3</span><div><h3>Подпишем договор</h3><p>Договор оформляет бесплатное подключение хозяйства к AgroInn.</p></div></li>
+          <li><span>4</span><div><h3>Вы передадите сведения о полях</h3><p>После оформления договора передайте информацию о полях в согласованном формате.</p></div></li>
+          <li><span>5</span><div><h3>Мы подключим поля</h3><p>Загрузим поля в AgroInn и поставим их на обработку.</p></div></li>
+          <li><span>6</span><div><h3>Откроем доступ к сервисам</h3><p>По мере обработки полей станут доступны Цифровой портрет, мониторинг и возможности AgroInn-Agent.</p></div></li>
+        </ol>
+      </div>
+    </section>
 
-  <script>
-    const map = L.map("map").setView([51.0, 71.0], 8);
+    <section class="section agreement-section" aria-labelledby="agreement-title">
+      <div class="container agreement-card">
+        <div><h2 id="agreement-title">Зачем нужен договор</h2></div>
+        <div class="agreement-copy">
+          <p><strong>Договор официально подключает хозяйство к программе цифрового мониторинга AgroInn.</strong></p>
+          <p>В договоре определяется:</p>
+          <ul class="agreement-list">
+            <li>какие поля подключаются к AgroInn;</li>
+            <li>как AgroInn обрабатывает данные этих полей;</li>
+            <li>какие бесплатные сервисы получает хозяйство;</li>
+            <li>как данные полей могут использоваться AgroInn-Agent для подбора технологий, товаров и услуг.</li>
+          </ul>
+          <p class="agreement-highlight">Договор не обязывает хозяйство что-либо покупать через AgroInn.</p>
+          <p class="caption">Перечень документов для оформления зависит от страны, формы хозяйства и основания использования земли. Мы уточним его при подключении.</p>
+        </div>
+      </div>
+    </section>
 
-    L.tileLayer(
-      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      {
-        attribution: "&copy; OpenStreetMap contributors"
-      }
-    ).addTo(map);
+    <section class="section section-soft" id="timeline">
+      <div class="container">
+        <div class="section-heading"><p class="eyebrow">Этапы подключения</p><h2>Когда будут доступны сервисы AgroInn</h2></div>
+        <div class="timeline-grid">
+          <article><span class="timeline-badge">Сейчас</span><h3>Подключаем хозяйства</h3><ul class="check-list"><li>принимаем обращения;</li><li>оформляем договоры;</li><li>получаем сведения о полях;</li><li>подключаем и ставим поля на обработку.</li></ul></article>
+          <article><span class="timeline-badge timeline-badge-future">С января–февраля 2027 года</span><h3>Начинаем предоставлять данные</h3><ul class="check-list"><li>Цифровой портрет поля;</li><li>мониторинг;</li><li>AgroInn-Agent с учётом данных подключённых полей.</li></ul></article>
+        </div>
+        <p class="caption timeline-note">Данные будут появляться поэтапно по мере обработки полей.</p>
+      </div>
+    </section>
 
-    const marker = L.marker([51.0, 71.0]).addTo(map);
+    <section class="section" aria-labelledby="free-title">
+      <div class="container free-grid">
+        <div><h2 id="free-title">AgroInn для хозяйства — бесплатно</h2><p>Подключение и использование бесплатной версии AgroInn не требуют покупки дополнительных продуктов или услуг.</p></div>
+        <div class="free-card"><h3>В бесплатную версию входят</h3><ul class="check-list check-list-green"><li>Цифровой портрет поля с базовыми данными пахотного слоя;</li><li>мониторинг подключённых полей;</li><li>AgroInn-Agent;</li><li>рекомендации технологий, товаров и услуг с учётом данных полей.</li></ul><p class="note"><strong>Покупать то, что рекомендует AgroInn-Agent, не обязательно.</strong> Решение всегда принимает хозяйство.</p></div>
+      </div>
+    </section>
 
-    marker
-      .bindTooltip("Нажмите на точку, чтобы открыть редактор")
-      .openTooltip();
+    <section class="section section-soft" aria-labelledby="extra-title">
+      <div class="container extra-grid"><div><h2 id="extra-title">Если понадобится больше</h2><p>Дополнительно можно подключить:</p></div><ul class="feature-tags"><li>Глубокая диагностика</li><li>«Агросоветник»</li><li>Экспертное сопровождение</li><li>Другие сервисы AgroInn</li></ul></div>
+    </section>
 
-    marker.on("click", () => {
-      document.getElementById("editor").style.display = "flex";
-      loadSoilStatus();
-    });
+    <section class="section" id="faq">
+      <div class="container faq-grid">
+        <div><h2>Частые вопросы</h2></div>
+        <div class="faq-list">
+          <details><summary>Что входит в бесплатную версию AgroInn?</summary><p>Цифровой портрет поля, мониторинг и AgroInn-Agent.</p></details>
+          <details><summary>Что делает AgroInn-Agent?</summary><p>Учитывает данные подключённых полей и помогает подбирать подходящие технологии, товары и услуги.</p></details>
+          <details><summary>Обязательно ли покупать то, что рекомендует AgroInn-Agent?</summary><p>Нет. AgroInn-Agent даёт рекомендации, а решение всегда принимает хозяйство.</p></details>
+          <details><summary>Когда появятся данные по полям?</summary><p>Первые данные планируем предоставлять с января–февраля 2027 года. Конкретные поля будут становиться доступны по мере их обработки.</p></details>
+          <details><summary>Есть ли ограничения по площади или количеству полей?</summary><p>Сейчас ограничений по площади или количеству подключаемых полей не установлено.</p></details>
+          <details><summary>Какие документы потребуются?</summary><p>Это зависит от страны, формы хозяйства и основания использования земли. Представитель AgroInn уточнит перечень при подключении.</p></details>
+          <details><summary>Как начать подключение?</summary><p>Позвоните или напишите представителю AgroInn в своей стране. Контакты указаны ниже.</p></details>
+        </div>
+      </div>
+    </section>
 
-    function closeEditor() {
-      document.getElementById("editor").style.display = "none";
-    }
+    <section class="section contact-section" id="contacts">
+      <div class="container">
+        <div class="contact-heading"><p class="eyebrow">Подключение к AgroInn</p><h2>Хотите подключить хозяйство?</h2><p>Позвоните или напишите представителю AgroInn в своей стране. Расскажем, как проходит подключение и какие документы понадобятся.</p></div>
+        <div class="contact-cards" aria-label="Контакты представителей AgroInn по странам">
+          <article class="contact-card"><h3>Россия</h3><div class="contact-method"><span>Email</span><a href="mailto:dr.ziganshin@yandex.ru">dr.ziganshin@yandex.ru</a></div><div class="contact-method"><span>Телефон</span><a href="tel:+79031188810">+7 903 118-88-10</a></div></article>
+          <article class="contact-card"><h3>Казахстан</h3><div class="contact-method"><span>Email</span><a href="mailto:agroinnovationtoo@gmail.com">agroinnovationtoo@gmail.com</a></div><div class="contact-method"><span>Телефон</span><a href="tel:+77017325727">+7 701 732-57-27</a></div></article>
+          <article class="contact-card"><h3>Беларусь</h3><div class="contact-method"><span>Email</span><a href="mailto:1190423@mail.ru">1190423@mail.ru</a></div><div class="contact-method"><span>Телефон</span><a href="tel:+375291190423">+375 29 119-04-23</a></div></article>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    function saveData() {
-      const crop = document.getElementById("crop").value;
-      const recommendation =
-        document.getElementById("recommendation").value;
-      const priority =
-        document.getElementById("priority").value;
-
-      alert(
-        `Сохранено:\n` +
-        `Культура: ${crop}\n` +
-        `Рекомендации: ${recommendation}\n` +
-        `Приоритет: ${priority}`
-      );
-
-      closeEditor();
-    }
-
-    function loadSoilStatus() {
-      const statusElement =
-        document.getElementById("soil-status");
-
-      statusElement.textContent =
-        "Загрузка данных о почве...";
-
-      fetch("https://example.com/api/soil-status")
-        .then((response) => response.json())
-        .then((data) => {
-          statusElement.textContent =
-            `Гумус: ${data.humus}%\n` +
-            `Азот: ${data.nitrogen} мг/кг\n` +
-            `pH: ${data.pH}`;
-        })
-        .catch(() => {
-          statusElement.textContent =
-            "Не удалось загрузить данные о почве";
-        });
-    }
-  </script>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><img src="/assets/images/agroinn-logo.svg" width="170" height="74" alt="AgroInn"><p>Цифровой мониторинг полей для хозяйств России, Беларуси и Казахстана.</p></div>
+      <div><h2>Документы</h2><a href="/privacy/">Политика обработки персональных данных</a></div>
+      <div><h2>Контакты</h2><a href="#contacts">Контакты</a></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span data-current-year>2026</span> AgroInn</span><span>Русскоязычная версия</span></div>
+  </footer>
 </body>
 </html>
