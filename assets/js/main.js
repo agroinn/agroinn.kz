@@ -9,6 +9,22 @@ function closeMenu() {
 }
 
 if (menuButton && menu) {
+  const currentLanguage = document.documentElement.lang;
+  const languageLink = document.createElement('a');
+
+  if (currentLanguage === 'kk') {
+    languageLink.href = '/';
+    languageLink.textContent = 'Русский';
+    languageLink.setAttribute('aria-label', 'Орыс тіліндегі нұсқа');
+  } else {
+    languageLink.href = '/kz/';
+    languageLink.textContent = 'Қазақша';
+    languageLink.setAttribute('aria-label', 'Қазақ тіліндегі нұсқа');
+  }
+
+  languageLink.classList.add('language-link');
+  menu.appendChild(languageLink);
+
   menuButton.addEventListener('click', () => {
     const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
     menuButton.setAttribute('aria-expanded', String(!isOpen));
