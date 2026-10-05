@@ -1,5 +1,6 @@
 const menuButton = document.querySelector('[data-menu-button]');
 const menu = document.querySelector('[data-menu]');
+const currentLanguage = document.documentElement.lang;
 
 function closeMenu() {
   if (!menuButton || !menu) return;
@@ -9,7 +10,6 @@ function closeMenu() {
 }
 
 if (menuButton && menu) {
-  const currentLanguage = document.documentElement.lang;
   const languageLink = document.createElement('a');
 
   if (currentLanguage === 'kk') {
@@ -36,6 +36,12 @@ if (menuButton && menu) {
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeMenu();
+  });
+}
+
+if (currentLanguage === 'kk') {
+  document.querySelectorAll('a[href="/privacy/"]').forEach((link) => {
+    link.href = '/kz/privacy/';
   });
 }
 
