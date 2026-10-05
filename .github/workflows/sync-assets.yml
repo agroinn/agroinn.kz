@@ -1,0 +1,70 @@
+name: Sync AgroInn assets
+
+on:
+  push:
+    branches:
+      - sync-from-agroinn-ru
+    paths:
+      - '.github/workflows/sync-assets.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: sync-from-agroinn-ru
+
+      - name: Download production assets from agroinn.ru repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/css assets/js assets/images
+          base="https://raw.githubusercontent.com/agroinn/agroinn.ru/main"
+          curl -fsSL "$base/assets/css/styles.css" -o assets/css/styles.css
+          curl -fsSL "$base/assets/js/main.js" -o assets/js/main.js
+          for file in \
+            agroinn-agent.webp \
+            agroinn-logo.svg \
+            field-contours.webp \
+            field-data.webp \
+            field-portrait-mobile.webp \
+            field-portrait.webp \
+            field-satellite.webp \
+            monitoring-concept.webp; do
+            curl -fsSL "$base/assets/images/$file" -o "assets/images/$file"
+          done
+
+      - name: Verify local assets exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s assets/css/styles.css
+          test -s assets/js/main.js
+          test -s assets/images/agroinn-agent.webp
+          test -s assets/images/agroinn-logo.svg
+          test -s assets/images/field-contours.webp
+          test -s assets/images/field-data.webp
+          test -s assets/images/field-portrait-mobile.webp
+          test -s assets/images/field-portrait.webp
+          test -s assets/images/field-satellite.webp
+          test -s assets/images/monitoring-concept.webp
+
+      - name: Commit copied assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets
+          if git diff --cached --quiet; then
+            echo "Assets already synchronized"
+            exit 0
+          fi
+          git commit -m "Скопировать assets из agroinn.ru"
+          git push origin HEAD:sync-from-agroinn-ru
