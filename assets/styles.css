@@ -654,7 +654,6 @@ p { line-height: 1.6; }
 }
 
 .team-photos img { width: 100%; height: auto; border-radius: 11px; }
-.team-photos img:first-child { border-radius: 17%; }
 .team-photos img:nth-child(2) { transform: translateY(19px); }
 
 .contact {
